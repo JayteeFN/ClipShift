@@ -227,7 +227,7 @@ Your name or creator handle
 
 <label class="field">
 Vehicle
-<input name="car" required maxlength="100" placeholder="2022 Kia K5 GT-Line">
+<input name="car" required maxlength="100" placeholder="Make & Model">
 </label>
 
 <label class="field">
@@ -244,7 +244,14 @@ Category
 <span class="upload-icon">🎬</span>
 <strong>Choose video from device</strong>
 <small>Photos, Gallery, or Files · Maximum 2 minutes</small>
-<input id="clipFile" name="clipFile" type="file" accept="video/*" required>
+<input
+  id="clipFile"
+  name="clipFile"
+  type="file"
+  accept="video/*,image/*"
+  required
+>
+
 </label>
 
 <div id="fileDetails" class="upload-status" role="status">
@@ -263,9 +270,12 @@ Modifications / notes
 I own this clip or have permission to share it.
 </label>
 
-<button class="primary submit-ready" id="submitClipButton" type="submit" disabled>
-Prepare submission details →
+<button class="primary submit-ready"
+        id="submitClipButton"
+        type="submit">
+  Continue with clip →
 </button>
+
 
 <p class="help">
 This is a preview-only submission form. It can prepare the clip information for copying, but it does not upload the video or send it to ClipShift. A secure upload service is required for actual submissions and owner approval.
