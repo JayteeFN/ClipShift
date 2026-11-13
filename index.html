@@ -1,48 +1,535 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b0811"><meta name="description" content="ClipShift: discover exhaust notes, turbo sounds, car builds and automotive video culture."><title>ClipShift — Car culture in motion</title><style>
-:root{color-scheme:dark;--bg:#0b0811;--panel:#171220;--panel2:#21182d;--line:#352943;--text:#faf7ff;--muted:#b5a7c5;--purple:#b66aff;--pink:#f06adf;--radius:18px}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at top right,#251039 0,transparent 34%),var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--purple);outline-offset:3px}.top{height:70px;display:flex;align-items:center;justify-content:space-between;gap:15px;padding:0 22px;border-bottom:1px solid var(--line);background:#0e0a16ed;position:sticky;top:0;z-index:10;backdrop-filter:blur(16px)}.brand{font-size:25px;font-weight:950;letter-spacing:-1.5px;white-space:nowrap}.brand b{color:var(--purple)}.brand .play{font-size:14px;vertical-align:3px;background:var(--purple);color:#140b1e;padding:6px 8px;border-radius:9px;margin-right:8px}.nav{display:flex;gap:8px;align-items:center}.nav button,.ghost{border:1px solid transparent;color:var(--muted);background:transparent;padding:10px 13px;border-radius:12px}.nav button:hover,.nav button.active,.ghost:hover{background:var(--panel2);color:white}.primary{background:linear-gradient(110deg,#9d50ee,#cf72ff);color:#12091d;border:0;border-radius:12px;padding:11px 16px;font-weight:800}.primary:hover{filter:brightness(1.12)}.layout{max-width:1350px;margin:auto;display:grid;grid-template-columns:210px minmax(0,1fr);gap:28px;padding:26px 20px 80px}.sidebar{position:sticky;top:96px;align-self:start}.side-title{font-size:12px;color:var(--muted);font-weight:800;letter-spacing:1.5px;margin:18px 12px 8px}.side-btn{width:100%;text-align:left;display:block;padding:12px 14px;margin:4px 0;border:0;border-radius:13px;color:var(--muted);background:transparent}.side-btn.active,.side-btn:hover{background:var(--panel2);color:white}.side-note{font-size:12px;color:var(--muted);padding:14px;line-height:1.65}.hero{padding:34px;border:1px solid #4b2d66;border-radius:25px;background:radial-gradient(circle at 80% 0,#69349d 0,transparent 44%),linear-gradient(130deg,#231332,#130d1d);margin-bottom:25px}.eyebrow{font-size:12px;letter-spacing:2px;color:#d3a2ff;font-weight:900}.hero h1{font-size:clamp(30px,5vw,52px);line-height:1.08;letter-spacing:-2px;margin:10px 0}.hero h1 span{color:#c18aff}.hero p{max-width:600px;color:#d6c7e3;margin:12px 0 20px}.hero-actions{display:flex;gap:10px;flex-wrap:wrap}.outlined{border:1px solid #8c61ac;background:#251333;color:#f5e9ff;border-radius:12px;padding:11px 16px;font-weight:750}.search{display:flex;gap:10px;background:var(--panel);padding:9px 12px;border:1px solid var(--line);border-radius:14px;margin:0 0 17px}.search input{background:transparent;color:white;outline:none;border:0;flex:1;min-width:0}.search input::placeholder{color:#9e8caf}.chips{display:flex;gap:9px;overflow:auto;padding:0 0 14px;scrollbar-width:thin}.chip{white-space:nowrap;background:var(--panel);color:#cdbbdf;border:1px solid var(--line);border-radius:100px;padding:8px 14px}.chip.active{background:#5b2984;border-color:#a966e6;color:white}.sectionbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:8px 0 16px}.sectionbar h2{font-size:22px;letter-spacing:-.6px;margin:0}.count{color:var(--muted);font-size:13px}.feed{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.card{min-width:0;overflow:hidden;background:#17121f;border:1px solid var(--line);border-radius:19px;transition:transform .15s,border-color .15s}.card:hover{transform:translateY(-2px);border-color:#7d4baa}.poster{position:relative;aspect-ratio:16/10;overflow:hidden;background:linear-gradient(135deg,#3d225b,#120d1c);display:grid;place-items:center}.poster img{width:100%;height:100%;object-fit:cover;display:block}.poster:after{content:"";position:absolute;inset:40% 0 0;background:linear-gradient(transparent,#0d0819b0);pointer-events:none}.poster .symbol{font-size:64px;filter:drop-shadow(0 8px 15px #0008)}.tag{position:absolute;top:12px;left:12px;z-index:1;background:#0c071bdc;border:1px solid #7e58a5;border-radius:50px;padding:4px 10px;font-size:11px;font-weight:800}.watch{position:absolute;bottom:14px;left:14px;z-index:1;background:#bd74ff;color:#1a0929;border:0;border-radius:100px;padding:9px 13px;font-weight:900}.watch:hover{background:#e2b4ff}.cardbody{padding:15px}.card h3{font-size:17px;margin:0 0 5px}.meta{font-size:12px;color:var(--muted);margin:0 0 10px}.desc{color:#d5c6e0;font-size:13px;margin:0 0 12px}.actions{display:flex;align-items:center;justify-content:space-between;gap:8px}.save{background:var(--panel2);border:1px solid var(--line);color:#d9c6e8;border-radius:9px;padding:8px 11px}.save.saved{color:#f5b5ff;border-color:#b66aff}.empty{grid-column:1/-1;text-align:center;border:1px dashed #6b4b83;border-radius:16px;padding:40px;color:var(--muted)}.info{margin-top:25px;border:1px solid var(--line);border-radius:18px;background:var(--panel);padding:24px}.info h2{margin-top:0}.info p{color:var(--muted)}footer{border-top:1px solid var(--line);padding:25px;text-align:center;color:var(--muted);font-size:12px}dialog{width:min(94vw,700px);max-height:90dvh;background:#171020;border:1px solid #664080;color:white;border-radius:22px;padding:0;box-shadow:0 25px 80px #000b}dialog::backdrop{background:#050308df}.modalhead{padding:17px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}.modalhead h2{margin:0;font-size:19px}.close{border:0;background:#30213e;color:white;padding:7px 11px;border-radius:10px}.modalbody{padding:20px}.modalbody p{color:#cdbbdd}.player{width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#0c0913}.placeholder{aspect-ratio:16/9;background:radial-gradient(circle at center,#532679,#110c1c);border-radius:12px;display:grid;place-items:center;text-align:center;padding:18px}.field{display:block;margin:12px 0;font-size:13px;font-weight:750}.field input,.field select,.field textarea{display:block;margin-top:6px;width:100%;padding:12px;border-radius:10px;background:#100b17;border:1px solid #59436d;color:white}.field textarea{min-height:100px;resize:vertical}.help{font-size:12px;color:var(--muted)}.mobile-nav{display:none}.toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:#38204c;color:white;padding:10px 18px;border-radius:12px;z-index:20;display:none;box-shadow:0 10px 30px #0008}@media(max-width:950px){.layout{grid-template-columns:1fr}.sidebar{display:none}.nav{display:none}.feed{grid-template-columns:repeat(2,minmax(0,1fr))}.mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:12;justify-content:space-around;padding:9px 8px calc(9px + env(safe-area-inset-bottom));background:#130d1ded;border-top:1px solid var(--line);backdrop-filter:blur(15px)}.mobile-nav button{border:0;background:transparent;color:#b8a2c8;padding:8px;font-size:12px}.mobile-nav button.active{color:#d69aff}footer{padding-bottom:100px}}@media(max-width:610px){.top{height:61px;padding:0 16px}.brand{font-size:23px}.layout{padding:16px 13px 90px}.hero{padding:24px 19px}.hero h1{font-size:34px}.feed{grid-template-columns:1fr;gap:15px}.poster{aspect-ratio:16/11}.sectionbar h2{font-size:20px}.info{padding:18px}}
-</style></head><body>
-<header class="top"><a class="brand" href="#home" aria-label="ClipShift home"><span class="play">▶</span>CLIP<b>SHIFT</b></a><nav class="nav" aria-label="Main navigation"><button class="active" data-page="home">Home</button><button data-page="discover">Discover</button><button data-page="favorites">Saved</button><button data-page="about">About</button></nav><button class="primary" id="submitTop">＋ Submit a clip</button></header>
-<div class="layout"><aside class="sidebar"><div class="side-title">EXPLORE</div><button class="side-btn active" data-page="home">⌂ &nbsp; Home feed</button><button class="side-btn" data-page="discover">⌕ &nbsp; Discover</button><button class="side-btn" data-page="favorites">♡ &nbsp; Saved clips</button><button class="side-btn" data-page="about">ⓘ &nbsp; About ClipShift</button><div class="side-title">CATEGORIES</div><div id="sideCategories"></div><div class="side-note">ClipShift is currently a curated video discovery demo. Submit links for review; direct uploads and accounts are not enabled.</div></aside>
-<main id="home"><section class="hero" id="hero"><div class="eyebrow">WELCOME TO CLIPSHIFT</div><h1>Car culture.<br><span>In motion.</span></h1><p>From cold starts to custom builds. Discover the clips, sounds and machines that move car culture.</p><div class="hero-actions"><button class="primary" id="exploreBtn">Explore clips →</button><button class="outlined" id="submitHero">Submit your clip ＋</button></div></section><div class="search"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="Search cars, creators, mods, sounds…" aria-label="Search videos"><button class="ghost" id="clearSearch" aria-label="Clear search">✕</button></div><div class="chips" id="categoryChips" aria-label="Video categories"></div><div class="sectionbar"><h2 id="feedTitle">Latest clips</h2><span class="count" id="resultCount"></span></div><div class="feed" id="feed" aria-live="polite"></div><section class="info" id="aboutSection" hidden><h2>About ClipShift</h2><p>ClipShift is a curated home for automotive video culture: exhaust notes, turbo sounds, builds, cold starts, and meets. This early version uses example listings so you can test the experience before adding real videos.</p><p>To suggest a video, use the Submit a clip button. Submissions open your email app for review; they do not automatically publish.</p><p>Only submit videos you own or are authorized to share. Creators retain ownership of their content. For removal requests, use the contact address configured in the website file.</p><p><strong>Privacy:</strong> Saved clips stay in your browser's local storage on this device. No user account or analytics are included in this demo.</p></section></main></div>
-<footer>© <span id="year"></span> ClipShift · Built for car enthusiasts · Independent automotive discovery project</footer>
-<nav class="mobile-nav" aria-label="Mobile navigation"><button class="active" data-page="home">⌂<br>Home</button><button data-page="discover">⌕<br>Discover</button><button data-page="favorites">♡<br>Saved</button><button data-page="about">ⓘ<br>About</button></nav>
-<dialog id="videoDialog"><div class="modalhead"><h2 id="videoTitle">Video</h2><button class="close" id="closeVideo" aria-label="Close video">✕</button></div><div class="modalbody"><div id="playerHost"></div><p id="videoInfo"></p><p class="help">Videos are hosted by their original providers. Playback depends on the owner's embedding permissions.</p></div></dialog>
-<dialog id="submitDialog"><div class="modalhead"><h2>Submit a car clip</h2><button class="close" id="closeSubmit" aria-label="Close submission form">✕</button></div><div class="modalbody"><p>Send us a link to your public YouTube video for consideration. This form opens your email app; it does not upload or publish automatically.</p><form id="submitForm"><label class="field">Your name or creator handle<input name="creator" required maxlength="70" placeholder="@yourhandle"></label><label class="field">Vehicle<input name="car" required maxlength="100" placeholder="2022 Kia K5 GT-Line"></label><label class="field">Video title<input name="title" required maxlength="120" placeholder="Cold start with aftermarket exhaust"></label><label class="field">Category<select name="category" id="submitCategory"></select></label><label class="field">Public YouTube URL<input name="url" required type="url" placeholder="https://www.youtube.com/watch?v=..."></label><label class="field">Modifications / notes<textarea name="notes" maxlength="700" placeholder="Exhaust, intake, tune, etc."></textarea></label><button class="primary" type="submit">Open email to submit →</button><p class="help">Site owner: set your email in the CONFIG section of index.html. If no email is configured, you can copy the submission text instead.</p></form></div></dialog><div class="toast" id="toast" role="status"></div>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ClipShift | Car Culture in Motion</title>
+<style>
+:root {
+  color-scheme: dark;
+  --purple: #a855f7;
+  --bg: #09080e;
+  --panel: #171320;
+  --muted: #a6a0b2;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: white;
+  font-family: system-ui,-apple-system,Segoe UI,sans-serif;
+}
+button,a { font: inherit; }
+button { cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 17px max(20px,calc((100vw - 1100px)/2));
+  background: #0b0910ee;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #292132;
+}
+.logo {
+  font-size: 21px;
+  font-weight: 900;
+  letter-spacing: -.8px;
+}
+.logo span { color: var(--purple); }
+.btn {
+  border: 1px solid #5b3b76;
+  background: #21132e;
+  color: white;
+  border-radius: 14px;
+  padding: 12px 17px;
+  font-weight: 700;
+}
+.btn.primary {
+  background: linear-gradient(135deg,#8b35e9,#b45cf8);
+  border: 0;
+}
+.btn:hover,.nav button:hover { filter: brightness(1.2); }
+main {
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 20px 110px;
+}
+.hero {
+  padding: 90px 0 85px;
+  background: radial-gradient(ellipse at 80% 10%,#4b176955,transparent 60%);
+}
+.eyebrow {
+  font-size: 13px;
+  color: #d5a5ff;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+.hero h1 {
+  font-size: clamp(48px,9vw,95px);
+  line-height: 1.02;
+  letter-spacing: -4px;
+  margin: 15px 0;
+}
+.hero h1 em { font-style: normal; color: #b45cff; }
+.hero p {
+  color: #b9b3c4;
+  line-height: 1.7;
+  max-width: 580px;
+  font-size: 18px;
+}
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 26px;
+}
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+.section-head h2 { font-size: 29px; margin: 0; }
+.search {
+  width: 100%;
+  background: #191321;
+  border: 1px solid #3b2a4a;
+  border-radius: 13px;
+  padding: 14px;
+  color: white;
+  margin: 0 0 24px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 22px;
+}
+.clip {
+  background: var(--panel);
+  border: 1px solid #32253e;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.visual {
+  height: 235px;
+  background: linear-gradient(135deg,#281235,#0a0b13 65%,#55237d);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.visual .car {
+  font-size: 76px;
+  filter: drop-shadow(0 10px 25px #000);
+}
+.pill {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  border: 1px solid #ffffff33;
+  border-radius: 100px;
+  padding: 7px 11px;
+  background: #0a0910bb;
+  font-size: 12px;
+}
+.clip-body { padding: 19px; }
+.clip-body h3 { margin: 0 0 7px; font-size: 19px; }
+.clip-body p {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.clip-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.clip-actions button {
+  background: #281a35;
+  color: white;
+  border: 1px solid #503262;
+  border-radius: 11px;
+  padding: 10px 12px;
+  font-size: 13px;
+}
+.empty { color: var(--muted); padding: 40px 0; }
+.about {
+  background: #171020;
+  border: 1px solid #382347;
+  border-radius: 18px;
+  padding: 28px;
+  line-height: 1.7;
+}
+.nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background: #100d17f5;
+  border-top: 1px solid #34263d;
+  display: flex;
+  justify-content: space-around;
+  padding: 9px 5px max(12px,env(safe-area-inset-bottom));
+}
+.nav button {
+  background: none;
+  color: #b7adbf;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: center;
+  font-size: 12px;
+  padding: 6px 12px;
+}
+.nav button.active { color: #d3a2ff; }
+.nav b { font-size: 23px; font-weight: 400; }
+footer {
+  padding: 35px 20px 125px;
+  text-align: center;
+  color: #8f879a;
+  font-size: 12px;
+}
+dialog {
+  background: #191120;
+  color: white;
+  border: 1px solid #75469b;
+  border-radius: 20px;
+  max-width: min(460px,92vw);
+  padding: 26px;
+}
+dialog::backdrop { background: #000a; }
+dialog input,dialog textarea {
+  display: block;
+  width: 100%;
+  background: #0d0a12;
+  border: 1px solid #493257;
+  color: white;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 10px;
+}
+dialog textarea { min-height: 100px; }
+dialog .close {
+  float: right;
+  background: none;
+  border: 0;
+  color: white;
+  font-size: 25px;
+}
+@media(max-width:650px) {
+  .grid { grid-template-columns: 1fr; }
+  .hero { padding: 65px 0; }
+  .hero h1 { letter-spacing: -2px; }
+  .visual { height: 220px; }
+  .top { padding: 15px 18px; }
+  .top .btn { padding: 10px; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="logo" href="#home" data-page="home">
+    <span>▶</span>CLIPSHIFT
+  </a>
+  <button class="btn" id="submitTop">＋ Submit a clip</button>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="eyebrow">WELCOME TO CLIPSHIFT</div>
+    <h1>Car culture.<br><em>In motion.</em></h1>
+    <p>
+      From cold starts to custom builds. Discover the clips,
+      sounds and machines that move car culture.
+    </p>
+    <div class="actions">
+      <button class="btn primary" id="explore">
+        Explore clips →
+      </button>
+      <button class="btn" id="submitHero">
+        Submit your clip ＋
+      </button>
+    </div>
+  </section>
+
+  <section id="discover">
+    <div class="section-head">
+      <h2>Latest clips</h2>
+      <span style="color:#b58dd0">⌕</span>
+    </div>
+    <input
+      id="search"
+      class="search"
+      placeholder="Search clips, cars, or categories..."
+      aria-label="Search clips"
+    >
+    <div id="clips" class="grid"></div>
+    <p id="empty" class="empty" hidden>
+      No clips found. Try another search.
+    </p>
+  </section>
+
+  <section id="saved" hidden>
+    <div class="section-head"><h2>♡ Saved clips</h2></div>
+    <div id="savedClips" class="grid"></div>
+    <p id="savedEmpty" class="empty">
+      Tap ♡ Save on a clip to keep it here.
+    </p>
+  </section>
+
+  <section id="about" hidden>
+    <div class="section-head"><h2>About ClipShift</h2></div>
+    <div class="about">
+      ClipShift is an independent automotive discovery project
+      built for car enthusiasts. Explore builds, sounds,
+      cold starts, and driving clips. Want your car featured?
+      Tap <strong>Submit a clip</strong> to share it with us.
+    </div>
+  </section>
+</main>
+
+<footer>
+  © ClipShift · Built for car enthusiasts ·
+  Independent automotive discovery project
+</footer>
+
+<nav class="nav" aria-label="Main navigation">
+  <button data-page="home" class="active"><b>⌂</b>Home</button>
+  <button data-page="discover"><b>⌕</b>Discover</button>
+  <button data-page="saved"><b>♡</b>Saved</button>
+  <button data-page="about"><b>ⓘ</b>About</button>
+</nav>
+
+<dialog id="submitDialog">
+  <button class="close" id="closeDialog" aria-label="Close">×</button>
+  <h2>Submit your clip ＋</h2>
+  <p>Send us your car video for a chance to be featured.</p>
+  <form id="submitForm">
+    <input name="name" placeholder="Your name / handle" required>
+    <input name="car" placeholder="Car model / build" required>
+    <input name="url" type="url"
+      placeholder="TikTok, Instagram, or video link" required>
+    <textarea name="notes"
+      placeholder="Tell us about your clip (optional)"></textarea>
+    <button class="btn primary" type="submit">
+      Open email draft →
+    </button>
+  </form>
+  <p style="font-size:12px;color:#b6a6c0">
+    Change SUBMISSION_EMAIL in the code to your own email address.
+  </p>
+</dialog>
+
 <script>
 'use strict';
-/* ===== CLIPSHIFT CONFIGURATION =====
-   1) Change contactEmail to your email address when ready to receive submissions.
-   2) Replace demo video objects with YOUR OWN videos or clips you may embed.
-   3) For YouTube videoId use ONLY the 11-character video ID (not the whole URL).
-   4) Images are optional: set thumbnail to a trusted HTTPS image URL or leave blank.
-   5) This website is static: new submissions must be reviewed and added to this list manually.
-*/
-const CONFIG={contactEmail:That1GTLine@gmail.com'',siteName:'ClipShift'};
-const categories=['All','Exhaust','Turbo','Cold Starts','Builds','Car Meets','Reviews'];
-const videos=[
-{id:'demo1',title:'Deep exhaust note — showcase',car:'Sport sedan · exhaust setup',creator:'ClipShift Demo',category:'Exhaust',description:'Example listing. Replace this with a real creator-approved exhaust video.',videoId:'',thumbnail:'',emoji:'🏎️'},
-{id:'demo2',title:'Turbo spool & blow-off valve',car:'Turbocharged build',creator:'ClipShift Demo',category:'Turbo',description:'A demo card for turbo sounds and BOV clips.',videoId:'',thumbnail:'',emoji:'💨'},
-{id:'demo3',title:'Early morning cold start',car:'Modified coupe',creator:'ClipShift Demo',category:'Cold Starts',description:'A placeholder for a genuine cold-start video.',videoId:'',thumbnail:'',emoji:'🔥'},
-{id:'demo4',title:'Complete street build walkaround',car:'Custom project car',creator:'ClipShift Demo',category:'Builds',description:'Show the mods, wheels, suspension and story behind the build.',videoId:'',thumbnail:'',url:'https://www.tiktok.com/t/ZTPkwGW9F/'},
-{id:'demo5',title:'Cars & coffee highlights',car:'Community car meet',creator:'ClipShift Demo',category:'Car Meets',description:'A demo listing for enthusiast events and meetups.',videoId:'',thumbnail:'',emoji:'🌃'},
-{id:'demo6',title:'Exhaust setup comparison',car:'Performance review',creator:'ClipShift Demo',category:'Reviews',description:'Compare different setups with clear mod details.',videoId:'',thumbnail:'',emoji:'🎥'}
+
+// REPLACE THIS WITH YOUR EMAIL
+const SUBMISSION_EMAIL = 'YOUR_EMAIL@example.com';
+
+// YOUR CLIPSHIFT VIDEO FEED
+const clips = [
+  {
+    id: 1,
+    title: 'Demo 1 · Cold Start',
+    car: 'Exhaust sounds',
+    category: 'Cold Starts',
+    url: '',
+    emoji: '🏎️'
+  },
+  {
+    id: 2,
+    title: 'Demo 2 · Custom Build',
+    car: 'Car culture',
+    category: 'Builds',
+    url: '',
+    emoji: '🚘'
+  },
+  {
+    id: 3,
+    title: 'Demo 3 · Turbo Sounds',
+    car: 'Boost and blow-off',
+    category: 'Sounds',
+    url: '',
+    emoji: '🏁'
+  },
+  {
+    id: 4,
+    title: 'Demo 4 · TikTok Feature',
+    car: 'Featured TikTok clip',
+    category: 'Featured',
+    url: 'https://www.tiktok.com/t/ZTPkwGW9F/',
+    emoji: '🎬'
+  }
 ];
-const $=id=>document.getElementById(id);let page='home',category='All',search='';let saved=new Set();try{saved=new Set(JSON.parse(localStorage.getItem('clipshift-saved-v1')||'[]'))}catch(e){}
-function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function youtubeId(id){return /^[a-zA-Z0-9_-]{11}$/.test(id||'')?id:null}
-function toast(msg){$('toast').textContent=msg;$('toast').style.display='block';clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('toast').style.display='none',2800)}
-function setPage(next){page=next;if(next==='discover'){category='All';$('searchInput').focus()}if(next==='home'){category='All';search='';$('searchInput').value=''}document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===next));$('hero').hidden=next!=='home';$('aboutSection').hidden=next!=='about';$('categoryChips').hidden=next==='about';$('feedTitle').textContent=({home:'Latest clips',discover:'Discover clips',favorites:'Saved clips',about:'Explore ClipShift'})[next];render();window.scrollTo({top:0,behavior:'smooth'})}
-function setCategory(next){category=next;page='discover';document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page==='discover'));$('hero').hidden=true;$('aboutSection').hidden=true;$('categoryChips').hidden=false;$('feedTitle').textContent=next==='All'?'Discover clips':next+' clips';render();$('feedTitle').scrollIntoView({behavior:'smooth',block:'start'})}
-function renderCategories(){const chip=$('categoryChips'),side=$('sideCategories');chip.replaceChildren();side.replaceChildren();categories.forEach(cat=>{const a=document.createElement('button');a.className='chip'+(category===cat?' active':'');a.textContent=cat;a.addEventListener('click',()=>setCategory(cat));chip.appendChild(a);if(cat!=='All'){const b=document.createElement('button');b.className='side-btn'+(category===cat?' active':'');b.textContent='›  '+cat;b.addEventListener('click',()=>setCategory(cat));side.appendChild(b)}})}
-function render(){renderCategories();const list=videos.filter(v=>(page!=='favorites'||saved.has(v.id))&&(category==='All'||v.category===category)&&[v.title,v.car,v.creator,v.category,v.description].join(' ').toLowerCase().includes(search.toLowerCase().trim()));$('resultCount').textContent=list.length+' clip'+(list.length===1?'':'s');const feed=$('feed');feed.replaceChildren();if(page==='about'){ $('resultCount').textContent='';return }if(!list.length){const empty=document.createElement('div');empty.className='empty';empty.textContent=page==='favorites'?'No saved clips yet. Tap ♡ on any clip to save it on this device.':'No clips found. Try another search or category.';feed.appendChild(empty);return}for(const v of list){const card=document.createElement('article');card.className='card';const id=youtubeId(v.videoId);const img=v.thumbnail|| (id?'https://i.ytimg.com/vi/'+id+'/hqdefault.jpg':'');card.innerHTML=`<div class="poster">${img?`<img src="${esc(img)}" alt="Video thumbnail for ${esc(v.title)}" loading="lazy" referrerpolicy="no-referrer">`:`<span class="symbol" aria-hidden="true">${esc(v.emoji||'🚘')}</span>`}<span class="tag">${esc(v.category)}</span><button class="watch" data-watch="${esc(v.id)}">${id?'▶ Watch clip':'▶ Preview demo'}</button></div><div class="cardbody"><h3>${esc(v.title)}</h3><p class="meta">${esc(v.car)} · ${esc(v.creator)}</p><p class="desc">${esc(v.description)}</p><div class="actions"><span class="meta" style="margin:0">${id?'YouTube video':'Demo placeholder'}</span><button class="save ${saved.has(v.id)?'saved':''}" data-save="${esc(v.id)}" aria-label="${saved.has(v.id)?'Remove saved clip':'Save clip'}">${saved.has(v.id)?'♥ Saved':'♡ Save'}</button></div></div>`;feed.appendChild(card)}}
-function openVideo(id){const v=videos.find(v=>v.id===id);if(!v)return;$('videoTitle').textContent=v.title;$('videoInfo').textContent=v.car+' · '+v.creator+' — '+v.description;const host=$('playerHost');host.replaceChildren();const vid=youtubeId(v.videoId);if(vid){const iframe=document.createElement('iframe');iframe.className='player';iframe.title=v.title;iframe.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';iframe.referrerPolicy='strict-origin-when-cross-origin';iframe.allowFullscreen=true;iframe.src='https://www.youtube-nocookie.com/embed/'+vid+'?autoplay=1';host.appendChild(iframe)}else{const p=document.createElement('div');p.className='placeholder';p.innerHTML='<div><div style="font-size:55px">🎬</div><strong>Demo video placeholder</strong><p>Add a real YouTube video ID in the videos list to enable playback.</p></div>';host.appendChild(p)}$('videoDialog').showModal()}
-function closeVideo(){$('videoDialog').close();$('playerHost').replaceChildren()}
-$('feed').addEventListener('click',e=>{const w=e.target.closest('[data-watch]'),s=e.target.closest('[data-save]');if(w)openVideo(w.dataset.watch);if(s){const id=s.dataset.save;saved.has(id)?saved.delete(id):saved.add(id);try{localStorage.setItem('clipshift-saved-v1',JSON.stringify([...saved]))}catch(e){toast('Saving is unavailable in this browser mode')}render()}});
-document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>setPage(b.dataset.page)));
-$('searchInput').addEventListener('input',e=>{search=e.target.value;if(page==='about')setPage('discover');else render()});$('clearSearch').addEventListener('click',()=>{search='';$('searchInput').value='';render();$('searchInput').focus()});$('exploreBtn').addEventListener('click',()=>setPage('discover'));
-function openSubmit(){$('submitDialog').showModal()}$('submitTop').addEventListener('click',openSubmit);$('submitHero').addEventListener('click',openSubmit);$('closeSubmit').addEventListener('click',()=>$('submitDialog').close());$('closeVideo').addEventListener('click',closeVideo);$('videoDialog').addEventListener('close',()=>$('playerHost').replaceChildren());
-for(const c of categories.filter(x=>x!=='All')){const o=document.createElement('option');o.value=c;o.textContent=c;$('submitCategory').appendChild(o)}
-$('submitForm').addEventListener('submit',async e=>{e.preventDefault();const d=Object.fromEntries(new FormData(e.currentTarget));let u;try{u=new URL(d.url)}catch(err){toast('Enter a valid video URL');return}const valid=['youtube.com','www.youtube.com','m.youtube.com','youtu.be','www.youtu.be','youtube-nocookie.com','www.youtube-nocookie.com'];if(u.protocol!=='https:'||!valid.includes(u.hostname)){toast('Please provide a public YouTube link');return}const msg=`ClipShift video submission\n\nCreator: ${d.creator}\nCar: ${d.car}\nTitle: ${d.title}\nCategory: ${d.category}\nVideo: ${d.url}\nNotes: ${d.notes||'None'}\n\nI confirm I own or am authorized to share this video.`;if(CONFIG.contactEmail){window.location.href='mailto:'+encodeURIComponent(CONFIG.contactEmail)+'?subject='+encodeURIComponent('ClipShift clip submission: '+d.title)+'&body='+encodeURIComponent(msg);toast('Opening your email app…')}else{try{await navigator.clipboard.writeText(msg);toast('Submission copied! Configure your email in the HTML file.')}catch(err){window.prompt('Copy this submission:',msg)}}});
-$('year').textContent=new Date().getFullYear();render();
-</script></body></html>
+
+let saved = new Set();
+
+try {
+  saved = new Set(
+    JSON.parse(localStorage.getItem('clipshiftSaved') || '[]')
+  );
+} catch(e) {
+  saved = new Set();
+}
+
+const $ = id => document.getElementById(id);
+
+function card(c) {
+  const el = document.createElement('article');
+  el.className = 'clip';
+
+  el.innerHTML = `
+    <div class="visual">
+      <span class="pill"></span>
+      <span class="car"></span>
+    </div>
+    <div class="clip-body">
+      <h3></h3>
+      <p></p>
+      <div class="clip-actions">
+        <button class="watch"></button>
+        <button class="save"></button>
+      </div>
+    </div>
+  `;
+
+  el.querySelector('.pill').textContent = c.category;
+  el.querySelector('.car').textContent = c.emoji;
+  el.querySelector('h3').textContent = c.title;
+  el.querySelector('p').textContent = c.car;
+
+  const watch = el.querySelector('.watch');
+  watch.textContent = c.url ? '▶ Watch clip ↗' : '▶ Coming soon';
+  watch.disabled = !c.url;
+
+  watch.addEventListener('click', () => {
+    if(c.url) {
+      window.open(c.url, '_blank', 'noopener,noreferrer');
+    }
+  });
+
+  const save = el.querySelector('.save');
+  save.textContent = saved.has(c.id) ? '♥ Saved' : '♡ Save';
+
+  save.addEventListener('click', () => {
+    if(saved.has(c.id)) {
+      saved.delete(c.id);
+    } else {
+      saved.add(c.id);
+    }
+
+    try {
+      localStorage.setItem(
+        'clipshiftSaved',
+        JSON.stringify([...saved])
+      );
+    } catch(e) {}
+
+    render();
+  });
+
+  return el;
+}
+
+function render() {
+  const q = $('search').value.toLowerCase().trim();
+
+  const filtered = clips.filter(c =>
+    (c.title + ' ' + c.car + ' ' + c.category)
+      .toLowerCase().includes(q)
+  );
+
+  $('clips').replaceChildren(...filtered.map(card));
+  $('empty').hidden = filtered.length > 0;
+
+  const favs = clips.filter(c => saved.has(c.id));
+
+  $('savedClips').replaceChildren(...favs.map(card));
+  $('savedEmpty').hidden = favs.length > 0;
+}
+
+function page(name) {
+  ['saved','about'].forEach(id => {
+    $(id).hidden = id !== name;
+  });
+
+  $('discover').hidden = name === 'saved' || name === 'about';
+  $('home').hidden = name !== 'home';
+
+  document.querySelectorAll('.nav button').forEach(b => {
+    b.classList.toggle('active', b.dataset.page === name);
+  });
+
+  window.scrollTo({top: 0, behavior: 'smooth'});
+
+  if(name === 'discover') {
+    $('discover').scrollIntoView({behavior: 'smooth'});
+  }
+
+  render();
+}
+
+document.querySelectorAll('[data-page]').forEach(b => {
+  b.addEventListener('click', e => {
+    e.preventDefault();
+    page(b.dataset.page);
+  });
+});
+
+$('explore').addEventListener('click', () => page('discover'));
+$('search').addEventListener('input', render);
+
+function openSubmit() {
+  if(typeof $('submitDialog').showModal === 'function') {
+    $('submitDialog').showModal();
+  } else {
+    alert('Please email your video link to ' + SUBMISSION_EMAIL);
+  }
+}
+
+$('submitTop').addEventListener('click', openSubmit);
+$('submitHero').addEventListener('click', openSubmit);
+
+$('closeDialog').addEventListener('click', () => {
+  $('submitDialog').close();
+});
+
+$('submitDialog').addEventListener('click', e => {
+  if(e.target === $('submitDialog')) {
+    $('submitDialog').close();
+  }
+});
+
+$('submitForm').addEventListener('submit', e => {
+  e.preventDefault();
+
+  if(SUBMISSION_EMAIL === 'YOUR_EMAIL@example.com') {
+    alert('Site owner: set SUBMISSION_EMAIL in index.html first.');
+    return;
+  }
+
+  const f = new FormData(e.target);
+  const subject = 'ClipShift submission: ' + f.get('car');
+
+  const body =
+    'Name: ' + f.get('name') + '\n' +
+    'Car: ' + f.get('car') + '\n' +
+    'Video: ' + f.get('url') + '\n' +
+    'Notes: ' + f.get('notes');
+
+  window.location.href =
+    'mailto:' + SUBMISSION_EMAIL +
+    '?subject=' + encodeURIComponent(subject) +
+    '&body=' + encodeURIComponent(body);
+});
+
+render();
+</script>
+</body>
+</html>
