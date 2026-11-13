@@ -8,7 +8,87 @@
 <footer>© <span id="year"></span> ClipShift · Built for car enthusiasts · Independent automotive discovery project</footer>
 <nav class="mobile-nav" aria-label="Mobile navigation"><button class="active" data-page="home">⌂<br>Home</button><button data-page="discover">⌕<br>Discover</button><button data-page="favorites">♡<br>Saved</button><button data-page="about">ⓘ<br>About</button></nav>
 <dialog id="videoDialog"><div class="modalhead"><h2 id="videoTitle">Video</h2><button class="close" id="closeVideo" aria-label="Close video">✕</button></div><div class="modalbody"><div id="playerHost"></div><p id="videoInfo"></p><p class="help">Videos are hosted by their original providers. Playback depends on the owner's embedding permissions.</p></div></dialog>
-<dialog id="submitDialog"><div class="modalhead"><h2>Submit a car clip</h2><button class="close" id="closeSubmit" aria-label="Close submission form">✕</button></div><div class="modalbody"><p>Send us a link to your public YouTube video for consideration. This form opens your email app; it does not upload or publish automatically.</p><form id="submitForm"><label class="field">Your name or creator handle<input name="creator" required maxlength="70" placeholder="@yourhandle"></label><label class="field">Vehicle<input name="car" required maxlength="100" placeholder="2022 Kia K5 GT-Line"></label><label class="field">Video title<input name="title" required maxlength="120" placeholder="Cold start with aftermarket exhaust"></label><label class="field">Category<select name="category" id="submitCategory"></select></label><label class="field">Public YouTube URL<input name="url" required type="url" placeholder="https://www.youtube.com/watch?v=..."></label><label class="field">Modifications / notes<textarea name="notes" maxlength="700" placeholder="Exhaust, intake, tune, etc."></textarea></label><button class="primary" type="submit">Open email to submit →</button><p class="help">Site owner: set your email in the CONFIG section of index.html. If no email is configured, you can copy the submission text instead.</p></form></div></dialog><div class="toast" id="toast" role="status"></div>
+<dialog id="submitDialog">
+  <div class="modalhead">
+    <h2>Submit a car clip</h2>
+    <button class="close" id="closeSubmit"
+      aria-label="Close submission form">✕</button>
+  </div>
+
+  <div class="modalbody">
+    <p>
+      Share your car video with ClipShift!
+      Select a video directly from your phone's
+      photo gallery or files.
+    </p>
+
+    <form id="submitForm">
+
+      <label class="field">
+        Your name or creator handle
+        <input name="creator" required maxlength="70"
+          placeholder="@yourhandle">
+      </label>
+
+      <label class="field">
+        Vehicle
+        <input name="car" required maxlength="100"
+          placeholder="2022 Kia K5 GT-Line">
+      </label>
+
+      <label class="field">
+        Video title
+        <input name="title" required maxlength="120"
+          placeholder="Cold start with aftermarket exhaust">
+      </label>
+
+      <label class="field">
+        Category
+        <select name="category" id="submitCategory"></select>
+      </label>
+
+      <label class="field">
+        Choose your video
+        <input
+          id="clipFile"
+          name="clipFile"
+          type="file"
+          accept="video/*"
+          required>
+      </label>
+
+      <video
+        id="uploadPreview"
+        controls
+        playsinline
+        style="display:none;width:100%;max-height:300px;
+        border-radius:12px;margin:12px 0">
+      </video>
+
+      <p id="fileDetails" class="help">
+        Choose a video from Photos or Files.
+      </p>
+
+      <label class="field">
+        Modifications / notes
+        <textarea name="notes" maxlength="700"
+          placeholder="Exhaust, intake, tune, etc."></textarea>
+      </label>
+
+      <button class="primary" type="submit">
+        Continue to email submission →
+      </button>
+
+      <p class="help">
+        Your video is not uploaded automatically.
+        Attach the selected video in your email app
+        before sending your submission.
+      </p>
+
+    </form>
+  </div>
+</dialog>
+
 <script>
 'use strict';
 /* ===== CLIPSHIFT CONFIGURATION =====
@@ -43,6 +123,92 @@ document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',(
 $('searchInput').addEventListener('input',e=>{search=e.target.value;if(page==='about')setPage('discover');else render()});$('clearSearch').addEventListener('click',()=>{search='';$('searchInput').value='';render();$('searchInput').focus()});$('exploreBtn').addEventListener('click',()=>setPage('discover'));
 function openSubmit(){$('submitDialog').showModal()}$('submitTop').addEventListener('click',openSubmit);$('submitHero').addEventListener('click',openSubmit);$('closeSubmit').addEventListener('click',()=>$('submitDialog').close());$('closeVideo').addEventListener('click',closeVideo);$('videoDialog').addEventListener('close',()=>$('playerHost').replaceChildren());
 for(const c of categories.filter(x=>x!=='All')){const o=document.createElement('option');o.value=c;o.textContent=c;$('submitCategory').appendChild(o)}
-$('submitForm').addEventListener('submit',async e=>{e.preventDefault();const d=Object.fromEntries(new FormData(e.currentTarget));let u;try{u=new URL(d.url)}catch(err){toast('Enter a valid video URL');return}const valid=['youtube.com','www.youtube.com','m.youtube.com','youtu.be','www.youtu.be','youtube-nocookie.com','www.youtube-nocookie.com'];if(u.protocol!=='https:'||!valid.includes(u.hostname)){toast('Please provide a public YouTube link');return}const msg=`ClipShift video submission\n\nCreator: ${d.creator}\nCar: ${d.car}\nTitle: ${d.title}\nCategory: ${d.category}\nVideo: ${d.url}\nNotes: ${d.notes||'None'}\n\nI confirm I own or am authorized to share this video.`;if(CONFIG.contactEmail){window.location.href='mailto:'+encodeURIComponent(CONFIG.contactEmail)+'?subject='+encodeURIComponent('ClipShift clip submission: '+d.title)+'&body='+encodeURIComponent(msg);toast('Opening your email app…')}else{try{await navigator.clipboard.writeText(msg);toast('Submission copied! Configure your email in the HTML file.')}catch(err){window.prompt('Copy this submission:',msg)}}});
+// Video selection and preview
+let selectedVideoURL = null;
+
+$('clipFile').addEventListener('change', function() {
+  const file = this.files[0];
+  const preview = $('uploadPreview');
+  const details = $('fileDetails');
+
+  if (selectedVideoURL) {
+    URL.revokeObjectURL(selectedVideoURL);
+    selectedVideoURL = null;
+  }
+
+  preview.pause();
+  preview.removeAttribute('src');
+  preview.style.display = 'none';
+
+  if (!file) {
+    details.textContent = 'Choose a video from Photos or Files.';
+    return;
+  }
+
+  if (!file.type.startsWith('video/')) {
+    details.textContent = 'Please select a video file.';
+    this.value = '';
+    return;
+  }
+
+  const sizeMB = (file.size / (1024 * 1024)).toFixed(1);
+
+  details.textContent =
+    'Selected: ' + file.name + ' (' + sizeMB + ' MB)';
+
+  selectedVideoURL = URL.createObjectURL(file);
+  preview.src = selectedVideoURL;
+  preview.style.display = 'block';
+});
+
+// Custom video submission
+$('submitForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const form = e.currentTarget;
+  const file = $('clipFile').files[0];
+
+  if (!file || !file.type.startsWith('video/')) {
+    toast('Please select a video first.');
+    return;
+  }
+
+  const d = Object.fromEntries(new FormData(form));
+
+  const msg =
+    'ClipShift video submission\n\n' +
+    'Creator: ' + d.creator + '\n' +
+    'Car: ' + d.car + '\n' +
+    'Title: ' + d.title + '\n' +
+    'Category: ' + d.category + '\n' +
+    'Video filename: ' + file.name + '\n' +
+    'File size: ' +
+      (file.size / (1024 * 1024)).toFixed(1) + ' MB\n' +
+    'Notes: ' + (d.notes || 'None') + '\n\n' +
+    'IMPORTANT: Attach the selected video file ' +
+    'to this email before sending.\n\n' +
+    'I confirm I own or am authorized to share this video.';
+
+  if (CONFIG.contactEmail) {
+    const mailto =
+      'mailto:' + CONFIG.contactEmail +
+      '?subject=' + encodeURIComponent(
+        'ClipShift clip submission: ' + d.title
+      ) +
+      '&body=' + encodeURIComponent(msg);
+
+    window.location.href = mailto;
+
+    toast('Attach your video in the email app before sending.');
+  } else {
+    try {
+      await navigator.clipboard.writeText(msg);
+      toast('Submission details copied. Contact email not configured.');
+    } catch (err) {
+      window.prompt('Copy your submission details:', msg);
+    }
+  }
+});
+
 $('year').textContent=new Date().getFullYear();render();
 </script></body></html>
