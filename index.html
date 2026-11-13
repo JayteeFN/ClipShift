@@ -98,7 +98,36 @@
    4) Images are optional: set thumbnail to a trusted HTTPS image URL or leave blank.
    5) This website is static: new submissions must be reviewed and added to this list manually.
 */
-const CONFIG={contactEmail:'That1GTLine@gmail.com',siteName:'ClipShift'};
+const CONFIG={contactEmail:'That1GTLine@gmail.com',siteName:'ClipShift'};  
+const MAX_VIDEO_DURATION = 120;
+
+function checkVideoDuration(file) {
+  return new Promise((resolve, reject) => {
+    const video = document.createElement('video');
+    const url = URL.createObjectURL(file);
+
+    video.preload = 'metadata';
+
+    video.onloadedmetadata = () => {
+      const duration = video.duration;
+      URL.revokeObjectURL(url);
+
+      resolve(
+        Number.isFinite(duration) &&
+        duration > 0 &&
+        duration <= MAX_VIDEO_DURATION
+      );
+    };
+
+    video.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error('Cannot read video duration'));
+    };
+
+    video.src = url;
+  });
+}
+
 const categories=['All','Exhaust','Turbo','Cold Starts','Builds','Car Meets','Reviews'];
 const videos=[
 {id:'demo1',title:'Deep exhaust note — showcase',car:'Sport sedan · exhaust setup',creator:'ClipShift Demo',category:'Exhaust',description:'Example listing. Replace this with a real creator-approved exhaust video.',videoId:'',thumbnail:'',emoji:'🏎️'},
