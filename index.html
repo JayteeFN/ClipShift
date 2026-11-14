@@ -121,6 +121,36 @@ footer{padding-bottom:100px}
 .sectionbar h2{font-size:20px}
 .info{padding:18px}
 }
+  
+/* ===== CLIPSHIFT THUMBNAIL FIX ===== */
+
+/* Consistent thumbnail dimensions */
+.poster {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #120d1c;
+  display: grid;
+  place-items: center;
+}
+
+/* Show the entire photo without cropping */
+.poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+/* Keep thumbnails consistent on mobile */
+@media (max-width: 610px) {
+  .poster {
+    aspect-ratio: 16 / 9;
+  }
+}
+
 </style>
 </head>
 <body>
